@@ -15,10 +15,10 @@ export class SearchBoxComponent {
 
   searchTag(){
     const input = this.tagInput.nativeElement.value;
-    this.gifService.searchTag(input);
-    console.log(this.gifService.tagsHistory);
+      this.gifService.searchTag(input);
+      console.log(this.gifService.tagsHistory);
+      this.tagInput.nativeElement.value = '';
 
-    this.tagInput.nativeElement.value = '';
 
   }
 

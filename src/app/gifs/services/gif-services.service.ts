@@ -7,14 +7,21 @@ export class GifService {
 
   private _tagsHistory:string[] = [];
 
-  constructor() { }
+  constructor() { };
 
   get tagsHistory(){
     return [...this._tagsHistory];
-  }
+  };
 
   searchTag(newTag:string){
-    this._tagsHistory.unshift(newTag);
-  }
+    if (
+    newTag === '' 
+    ||
+    (this._tagsHistory.length > 0 && newTag.toLowerCase() === this._tagsHistory[0].toLowerCase())){
+      return
+    } else {
+      this._tagsHistory.unshift(newTag);
+    }
+  };
 
 }
