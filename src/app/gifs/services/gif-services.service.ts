@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -7,13 +8,20 @@ export class GifService {
 
   private _tagsHistory:string[] = [];
 
-  constructor() { };
+  private apiKey:string = 'K59UwpBzXAaUTjnNddTzDfU4SSBB23AS';
+
+  //TODO: Necesito un metodo que me organize los tags de manera que no haya ninguno repetido;
+
+  //TODO: Tambien necesito otro metodo para que los elementos no pasen de una cantidad espicifica
+
+  constructor( private http:HttpClient) { };
 
   get tagsHistory(){
     return [...this._tagsHistory];
   };
 
-  searchTag(newTag:string){
+
+  async searchTag(newTag:string):Promise<void>{
     if (
     newTag === '' 
     ||
@@ -21,6 +29,12 @@ export class GifService {
       return
     } else {
       this._tagsHistory.unshift(newTag);
+      this.http.get('https://api.giphy.com/v1/gifs/search?api_key=K59UwpBzXAaUTjnNddTzDfU4SSBB23AS&q=dota&limit=10')
+      .subscribe(
+        resp => {
+          console.log(resp);
+        }
+      )
     }
   };
 
