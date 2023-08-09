@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -9,6 +9,7 @@ export class GifService {
   private _tagsHistory:string[] = [];
 
   private apiKey:string = 'K59UwpBzXAaUTjnNddTzDfU4SSBB23AS';
+  private serviceUrl:string = 'https://api.giphy.com/v1/gifs';
 
   //TODO: Necesito un metodo que me organize los tags de manera que no haya ninguno repetido;
 
@@ -29,13 +30,21 @@ export class GifService {
       return
     } else {
       this._tagsHistory.unshift(newTag);
-      this.http.get('https://api.giphy.com/v1/gifs/search?api_key=K59UwpBzXAaUTjnNddTzDfU4SSBB23AS&q=dota&limit=10')
+
+      const params = new HttpParams()
+        .set('api_key',this.apiKey)
+        .set('limit','10')
+        .set('q',newTag)
+
+      
+
+      this.http.get(`${this.serviceUrl}/search`,{ params })
       .subscribe(
         resp => {
           console.log(resp);
         }
-      )
-    }
+      );
+    };
   };
 
 }
