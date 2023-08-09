@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Gif } from '../../interface/gif.interface';
 
 @Component({
   selector: 'gif-listado',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./listado-gifs.component.css']
 })
 export class ListadoGifsComponent {
+
+  @Input()
+  public gifList: Gif[] = [];
 
 }
