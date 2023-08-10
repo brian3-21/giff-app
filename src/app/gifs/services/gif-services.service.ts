@@ -25,28 +25,24 @@ export class GifService {
 
 
   async searchTag(newTag:string):Promise<void>{
-    if (
-    newTag === '' 
-    ||
-    (this._tagsHistory.length > 0 && newTag.toLowerCase() === this._tagsHistory[0].toLowerCase())){
-      return
-    } else {
-      this._tagsHistory.unshift(newTag);
 
-      const params = new HttpParams()
-        .set('api_key',this.apiKey)
-        // .set('limit','10')
-        .set('q',newTag)
-
-      
-
-      this.http.get<SearchResponse>(`${this.serviceUrl}/search`,{ params })
-      .subscribe( resp => {
-          this.gifList = resp.data;
-          console.log(this.gifList)
-        }
-      );
-    };
+    if(newTag!== ''){
+      if(true){
+        this._tagsHistory = this._tagsHistory.filter( elemnt => elemnt !== newTag);
+        console.log('Este es el filtrer:' , this._tagsHistory);
+        this._tagsHistory.unshift(newTag);
+        const params = new HttpParams()
+          .set('api_key',this.apiKey)
+          .set('limit','3')
+          .set('q',newTag)
+        this.http.get<SearchResponse>(`${this.serviceUrl}/search`,{ params })
+          .subscribe( resp => {
+            this.gifList = resp.data;
+            console.log(this.gifList)
+          }
+        );
+      }
+    }
   };
 
 }

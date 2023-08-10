@@ -18,8 +18,6 @@ export class SearchBoxComponent {
       this.gifService.searchTag(input);
       console.log(this.gifService.tagsHistory);
       this.tagInput.nativeElement.value = '';
-
-
   }
 
 

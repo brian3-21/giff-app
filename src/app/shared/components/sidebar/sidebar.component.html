@@ -3,10 +3,13 @@
     <hr class="text-white">
     <div class="list-group list-reset ">
         <button 
+        (click)="onClicTag(i)"
+        #SideTextTag
         class="list-group-item list-group-item-action pt-2"
         *ngFor="let i of listTags"
         >
         {{i | titlecase }}
+        <i class=" btn btn-danger">X</i>
         </button>
     </div>
 </div>
